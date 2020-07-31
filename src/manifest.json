@@ -11,6 +11,7 @@
     }
   },
   "browser_action": {
+    "default_icon": "assets/icons/tab.svg",
     "default_title": "Open tab menu"
   },
   "background": {
