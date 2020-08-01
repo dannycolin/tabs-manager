@@ -2,30 +2,30 @@
  * Browser Action
  */
 
-function setBadge() {
-  console.log("hello");
-  browser.browserAction.setBadgeText({
-    text: "1"
-  });
-}
-setBadge();
 
-async function onTabCreated(tab) {
+async function setBadge(event) {
   let tabs = await browser.tabs.query({});
+  let tabsLength = tabs.length;
 
-  browser.browserAction.setBadgeText({
-    text: tabs.length.toString()
-  });
-}
-browser.tabs.onCreated.addListener(onTabCreated);
-
-async function onTabRemoved(tabId, removeInfo) {
-  let tabs = await browser.tabs.query({});
-  let tabsLength = tabs.length - 1;
+  if (event == "onRemoved") {
+    tabsLength = tabs.length - 1;
+  } else {
+    tabsLength = tabs.length;
+  }
 
   browser.browserAction.setBadgeText({
     text: tabsLength.toString()
   });
+}
+setBadge();
+
+function onTabCreated(tab) {
+  setBadge("onCreated");
+}
+browser.tabs.onCreated.addListener(onTabCreated);
+
+function onTabRemoved(tabId, removeInfo) {
+  setBadge("onRemoved");
 }
 browser.tabs.onRemoved.addListener(onTabRemoved);
 
