@@ -2,8 +2,7 @@
  * Browser Action
  */
 
-
-async function setBadge(event) {
+async function setTabCounter(event) {
   let tabs = await browser.tabs.query({});
   let tabsLength = tabs.length;
 
@@ -17,15 +16,20 @@ async function setBadge(event) {
     text: tabsLength.toString()
   });
 }
-setBadge();
+
+function setTabCounterStyle() {
+  browser.browserAction.setTitle({ title: "Open Tab Manager" });
+  browser.browserAction.setBadgeBackgroundColor({ color: "rgba(0,0,0,0)" });
+  browser.browserAction.setBadgeTextColor({ color: "#f9f9fa" });
+}
 
 function onTabCreated(tab) {
-  setBadge("onCreated");
+  setTabCounter("onCreated");
 }
 browser.tabs.onCreated.addListener(onTabCreated);
 
 function onTabRemoved(tabId, removeInfo) {
-  setBadge("onRemoved");
+  setTabCounter("onRemoved");
 }
 browser.tabs.onRemoved.addListener(onTabRemoved);
 
@@ -35,3 +39,13 @@ function onBrowserActionClicked() {
   });
 }
 browser.browserAction.onClicked.addListener(onBrowserActionClicked);
+
+/*
+ * On Startup
+ */
+
+function main() {
+  setTabCounterStyle();
+  setTabCounter();
+}
+main();
