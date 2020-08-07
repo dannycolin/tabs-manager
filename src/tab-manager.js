@@ -98,7 +98,21 @@ async function onTabCloseButtonClicked(event) {
   await browser.tabs.remove(tabId);
 }
 
+function openNewTab() {
+  let menu = document.getElementById("menu");
+  let newTab = document.createElement("button");
+  newTab.className = "button newtab";
+  newTab.textContent = "Open new tab";
+  menu.appendChild(newTab);
+  newTab.addEventListener("click", function() {
+    browser.tabs.create({
+      url: "about:blank"
+    });
+  }, false);
+}
+
 function main() {
+  openNewTab();
   getTabs();
 }
 main();

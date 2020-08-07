@@ -53,6 +53,23 @@ body {
   margin: 0;
 }
 
+#menu {
+  margin: 8px;
+}
+
+#menu button {
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: 2px;
+  color: var(--button-fg-color);
+  height: 32px;
+  padding: 0 8px;
+}
+
+.newtab {
+  width: 100%;
+}
+
 #tab-list {
   display: flex;
   flex-direction: column;
@@ -65,6 +82,10 @@ body {
   border-bottom: solid 1px var(--tab-separator);
   line-height: 2em;
   padding: 8px;
+}
+
+.tab-item:first-child {
+  border-top: solid 1px var(--tab-separator);
 }
 
 .tab-item button {
