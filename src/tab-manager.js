@@ -38,7 +38,7 @@ function updateTabs(action, tabId, tabTitle) {
 
     tabItemTitle = document.createElement("span");
     tabItemTitle.className = "tab-title";
-    tabItemTitle.textContent = tab.title;
+    tabItemTitle.textContent = tabTitle;
 
     tabItemCloseButton = document.createElement("button");
     tabItemCloseButton.textContent = "Close";
